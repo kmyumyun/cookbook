@@ -1,7 +1,19 @@
-let express = require("express"),
-    app = express(),
-    port = process.env.PORT || 3000;
+const express = require("express");
+const app = express();
 
-app.listen(port);
+const port = process.env.PORT || 3000;
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const routes = require("./api/routes/cookBookRoutes");
 
-console.log("CookBook API started on: ", port);
+mongoose.set('useUnifiedTopology', true);
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/CookBookDB",  {useNewUrlParser: true});
+
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+
+app.use("/tasks", routes);
+app.listen(port, () => {
+    console.log("Server is listening on port: ", port);
+});
