@@ -1,19 +1,43 @@
 const express = require("express");
-const app = express();
-
-const port = process.env.PORT || 3000;
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+// create new db.config.js file with your db settings
+const dbConfig = require("./db.config");
+
+// routes
 const routes = require("./api/routes/cookBookRoutes");
+const authRoute = require("./api/routes/auth.route");
 
-mongoose.set('useUnifiedTopology', true);
+const app = express();
+const port = process.env.PORT || 3000;
+const corsOptions = {
+    origin: "http://localhost:8081"
+};
+
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/CookBookDB",  {useNewUrlParser: true});
+mongoose
+    .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true  
+    });
 
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
 app.use("/tasks", routes);
+app.use("/auth", authRoute);
+
+app.get("/", (req, res) => {
+    res.json({message: "Welcome to test app!"});
+});
+
 app.listen(port, () => {
     console.log("Server is listening on port: ", port);
 });
