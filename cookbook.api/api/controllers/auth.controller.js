@@ -1,84 +1,42 @@
 const mongoose = require("mongoose");
 const UserModel = require("../models/auth/user.model");
-const config = require("../../settings.config.json");
-
+const config = require("../../resources/config/settings.config.json");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-
-exports.createUser = function(req, res){
-    let newUser = new UserModel(req.body);
-    newUser.save((err, user) => {
-        if(err){
-            res.send(err);
-        }
-
-        res.json(`User with data: ${user} created!`);
-    });
-};
+const userService = require("../services/user.service");
+const messageResources = require("../../resources/messages.resource.json")
 
 exports.getAllUsers = function (req, res) {
-    UserModel.find({}, function(err, result) {
-        if (err) {
-            res.send(err);
-          } else {
-            res.send(result);
-          }
-    })
-}
-
-exports.login = function(req, res) {
-    UserModel.findOne({
-        username: req.body.username
-      })
-        .exec((err, user) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-    
-          if (!user) {
-            return res.status(404).send({ message: "User Not found." });
-          }
-    
-          var validPassword = bcrypt.compareSync(
-            req.body.password,
-            user.password
-          );
-    
-          if (!validPassword) {
-            return res.status(401).send({
-              accessToken: null,
-              message: "Invalid Password!"
-            });
-          }
-    
-          var token = jwt.sign({ id: user.id }, config.appSettings.jwtSecret, {
-            expiresIn: 10 // 24 hours
-          });
-    
-          res.status(200).send({
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            accessToken: token
-          });
-        });
+  UserModel.find({}, function (err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
 };
 
-// TODO: check if username is unique
-exports.register = function(req, res) {
-    const user = new UserModel({
-        username: req.body.username,
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 8)
-      });
-    
-      user.save((err, user) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-        
-        res.send({ message: `User: ${user.username} was registered successfully!` });
-      });
+exports.login = async function (req, res) {
+  let userDTO = req.body;
+
+  try {
+    let result = await userService.authenticateUser(userDTO);
+    res.status(200).send(result);
+  }
+  catch(err){
+    let status = err.status ? err.status : 500;
+    console.log(err.error);
+    res.status(status).send({message: err.message, code: err.code});
+  }
+};
+
+exports.register = async function (req, res) {
+  let userDTO = req.body;
+
+  try {
+    let result = await userService.createUser(userDTO);
+    res.send({message: `${messageResources.user.create.success} ${result}`});
+  } catch (err) { 
+    res.status(500).send({ message: `${messageResources.user.create.fail} ${err}` });
+  }
 };

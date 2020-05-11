@@ -1,0 +1,20 @@
+{
+  "user": {
+    "create": {
+      "success": "User creation succeeded:",
+      "fail": "User creation failed:"
+    },
+    "authenticate": {
+        "notFound": "User not found!",
+        "incorrectPassword": "Password is incorrect!"
+    }
+  },
+  "validate": {
+    "authentication": {
+      "token": {
+        "missing": "Authentication failed: Missing token!",
+        "invalid": "Authentication failed: Invalid token!"
+      }
+    }
+  }
+}

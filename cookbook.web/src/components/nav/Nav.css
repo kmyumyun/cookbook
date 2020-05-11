@@ -1,0 +1,54 @@
+.header {
+  background-color: blanchedalmond;
+  height: 70px;
+}
+
+.navbar {
+  width: 80%;
+  height: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-account,
+.nav-page {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+}
+
+.nav-link {
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+  height: 50px;
+  margin: 20px 0 0 0;
+  /*transition*/
+  background: linear-gradient(to top, red 48%, blanchedalmond 50%);
+  background-size: 300% 300%;
+  background-position: center top;
+  transition: all 0.5s ease;
+}
+
+.nav-link:hover {
+  background-position: center bottom;
+}
+
+.nav-link a:hover {
+    color: whitesmoke;
+}
+
+.nav-link a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px 0px 10px;
+  margin: 0px;
+  height: 100%;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.nav-account {
+  float: right;
+}

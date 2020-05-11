@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const authController = require("../controllers/auth.controller")
-const authService = require("../services/auth/auth.service")
+const validation = require("../middlewares/validators");
 
 router.route("/")
-    .get([authService.verifyToken], (req, res) => {
+    .get([validation.verifyToken], (req, res) => {
             res.json("Auth Home Page");
     });
 

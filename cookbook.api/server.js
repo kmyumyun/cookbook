@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 // create new db.config.js file with your db settings
-const dbConfig = require("./db.config");
+const dbConfig = require("./resources/config/db.config");
 
 // routes
 const routes = require("./api/routes/cookBookRoutes");
