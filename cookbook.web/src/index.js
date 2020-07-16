@@ -2,16 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Header from "./components/nav/Header";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
+
+axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Header />
-      <App />
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

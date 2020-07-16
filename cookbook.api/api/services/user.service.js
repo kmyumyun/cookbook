@@ -1,4 +1,5 @@
 const UserModel = require("../models/auth/user.model");
+const UserInfoModel = require("../models/user/userInfo.model");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const message = require("../../resources/messages.resource.json");
@@ -6,10 +7,15 @@ const code = require("../../resources/error.code.json");
 const config = require("../../resources/config/settings.config");
 
 exports.createUser = async function (userDTO) {
+  let userInfo = new UserInfoModel();
+
   let user = new UserModel({
     username: userDTO.username,
     email: userDTO.email,
     password: bcrypt.hashSync(userDTO.password, 8),
+    firstName: userDTO.firstName,
+    lastName: userDTO.firstName,
+    userInfo: userInfo
   });
 
   let result = await user.save();

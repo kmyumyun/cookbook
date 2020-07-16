@@ -1,0 +1,41 @@
+:root{
+    --btn-border-color: #F39C12;
+}
+
+.active {
+    background-color: #0d68a1 !important;
+    color: #FBFCFC;
+}
+
+.mode-button-wrap {
+    text-align: center;
+    padding: 10px 0px;
+}
+.mode-form-wrap {
+    text-align: center;
+}
+
+.btn-acc{
+    background-color: transparent;
+    height: 60px;
+    width: 180px;
+    outline: none;
+    border: none;
+    border-bottom: solid 2px var(--btn-border-color);
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.btn-acc:active {
+    outline: none;
+    border-style: outset;
+    border:none;
+    border-bottom: solid 2px var(--btn-border-color)
+}
+
+.btn-acc:hover {
+    background-color: #0d68a1 !important;
+    color: #FBFCFC;
+    cursor: pointer;
+}
+

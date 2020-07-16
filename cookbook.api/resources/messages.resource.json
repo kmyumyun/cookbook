@@ -5,8 +5,8 @@
       "fail": "User creation failed:"
     },
     "authenticate": {
-        "notFound": "User not found!",
-        "incorrectPassword": "Password is incorrect!"
+      "notFound": "User not found!",
+      "incorrectPassword": "Password is incorrect!"
     }
   },
   "validate": {
@@ -15,6 +15,13 @@
         "missing": "Authentication failed: Missing token!",
         "invalid": "Authentication failed: Invalid token!"
       }
+    },
+    "schemeModel": {
+      "required": "{0} is required!",
+      "min": "{0} value is too low. Minimum is {1}",
+      "max": "{0} value is too high, Maximum is {1}",
+      "maxLength": "{0} is too long. Maximum length is {1}",
+      "minLength": "{0} is too short. Minimum length is {1}"
     }
   }
 }

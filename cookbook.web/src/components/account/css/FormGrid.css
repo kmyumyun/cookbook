@@ -1,0 +1,82 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: repeat(1fr, 2);
+}
+
+.row {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.box-label {
+  grid-column: 1;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.box-input, .box-validation {
+    grid-column: 2;
+    text-align: left;
+    border-left: 1px solid #3CB371;
+    padding-left: 10px;
+}
+
+.box-validation {
+  grid-row: 2;
+  padding-bottom: 10px;
+}
+
+.ve {
+
+    font-size: 10px;
+    color: red;
+    padding-left: 5px;
+}
+
+.pt-10 {
+    padding-top: 10px;
+}
+
+.f-input {
+    height: 30px;
+    width: 175px;
+    border-radius: 2px;
+    border: 1px solid #d0d0d0;
+    font-size: 20px;
+    padding-left: 2px;
+    position: relative;
+}
+
+.f-input:focus, .f-input:hover {
+   border: 1px solid #000000;
+}
+
+.btn-sbmt {
+  background-color:transparent;
+  margin-top: 20px;
+  height: 35px;
+  width: 85px;
+  border-radius: 25px;
+  border: 2px solid #3CB371;
+  font-size: 15px;
+  font-weight: 600;
+  color: #3CB371
+}
+
+.btn-sbmt:hover{
+    cursor: pointer;
+    background-color: #3CB371;
+    color: white;
+}
+
+input {
+    outline-width: 0px;
+}
+
+label {
+    font-size: 20px;
+}
+
+
+

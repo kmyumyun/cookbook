@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+//misc items
+require("./resources/util");
+
 // create new db.config.js file with your db settings
 const dbConfig = require("./resources/config/db.config");
 
