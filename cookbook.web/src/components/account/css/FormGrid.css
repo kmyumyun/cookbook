@@ -15,11 +15,12 @@
   padding-right: 10px;
 }
 
-.box-input, .box-validation {
-    grid-column: 2;
-    text-align: left;
-    border-left: 1px solid #3CB371;
-    padding-left: 10px;
+.box-input,
+.box-validation {
+  grid-column: 2;
+  text-align: left;
+  border-left: 1px solid #3cb371;
+  padding-left: 10px;
 }
 
 .box-validation {
@@ -28,55 +29,71 @@
 }
 
 .ve {
-
-    font-size: 10px;
-    color: red;
-    padding-left: 5px;
+  font-size: 10px;
+  color: red;
+  padding-left: 5px;
+  width: 175px;
 }
 
 .pt-10 {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .f-input {
-    height: 30px;
-    width: 175px;
-    border-radius: 2px;
-    border: 1px solid #d0d0d0;
-    font-size: 20px;
-    padding-left: 2px;
-    position: relative;
+  height: 30px;
+  width: 175px;
+  border-radius: 2px;
+  border: 1px solid #d0d0d0;
+  font-size: 20px;
+  padding-left: 2px;
+  position: relative;
 }
 
-.f-input:focus, .f-input:hover {
-   border: 1px solid #000000;
+.f-input:focus,
+.f-input:hover {
+  border: 1px solid #000000;
 }
 
 .btn-sbmt {
-  background-color:transparent;
+  background-color: transparent;
   margin-top: 20px;
   height: 35px;
   width: 85px;
   border-radius: 25px;
-  border: 2px solid #3CB371;
+  border: 2px solid #3cb371;
   font-size: 15px;
   font-weight: 600;
-  color: #3CB371
+  color: #3cb371;
 }
 
-.btn-sbmt:hover{
-    cursor: pointer;
-    background-color: #3CB371;
-    color: white;
+.btn-sbmt:hover {
+  cursor: pointer;
+  background-color: #3cb371;
+  color: white;
 }
 
 input {
-    outline-width: 0px;
+  outline-width: 0px;
 }
 
 label {
-    font-size: 20px;
+  font-size: 20px;
 }
 
+.invalid {
+  box-shadow: 0 0 3px 0 red inset, inset -1px -1px 1px -1px red;
+}
 
+.invalid:hover,
+.invalid:focus {
+  border: 1px solid red;
+}
 
+.valid {
+  box-shadow: 0 0 3px 0 green inset, inset -1px -1px 1px -1px green;
+}
+
+.valid:hover,
+.valid:focus {
+  border: 1px solid green;
+}

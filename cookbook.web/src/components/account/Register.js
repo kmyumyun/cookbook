@@ -5,7 +5,9 @@ import loc from "../../resources/lang/localization";
 import AuthService from "../../services/auth/auth.service";
 
 function RegisterForm() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, watch, handleSubmit, errors, formState } = useForm();
+  const { isSubmitted } = formState;
+  const watchPassword = watch("password");
   const onSubmit = async (data) => {
     console.log("Register data is:");
     console.log(data);
@@ -22,7 +24,11 @@ function RegisterForm() {
           </div>
           <div class="box-input pt-10">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.username && isSubmitted ? " invalid" : "") +
+                (!errors.username && isSubmitted ? " valid" : "")
+              }
               id="username"
               name="username"
               type="text"
@@ -31,25 +37,38 @@ function RegisterForm() {
           </div>
           <div class="box-validation">
             <div class="ve">
-              {errors.username?.type === "required" && loc.required.format([loc.username])}
-              {errors.username?.type === "minLength" && "Too short"}
+              {errors.username?.type === "required" &&
+                loc.formatString(loc.required, loc.username)}
+              {errors.username?.type === "minLength" &&
+                loc.formatString(loc.minLength, loc.username, "3")}
+              {errors.username?.type === "maxLength" &&
+                loc.formatString(loc.maxLength, loc.username, "35")}
             </div>
           </div>
         </div>
         <div class="row">
           <div class="box-label">
-            <label htmlFor="lastname">{loc.firstname}*</label>
+            <label htmlFor="firstname">{loc.firstname}*</label>
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.firstname && isSubmitted ? " invalid" : "") +
+                (!errors.firstname && isSubmitted ? " valid" : "")
+              }
               id="firstname"
               name="firstname"
               type="text"
               ref={register({ required: true })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {errors.firstname?.type === "required" &&
+                loc.formatString(loc.required, loc.firstname)}
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="box-label">
@@ -57,14 +76,23 @@ function RegisterForm() {
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.lastname && isSubmitted ? " invalid" : "") +
+                (!errors.lastname && isSubmitted ? " valid" : "")
+              }
               id="lastname"
               name="lastname"
               type="text"
               ref={register({ required: true })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {errors.lastname?.type === "required" &&
+                loc.formatString(loc.required, loc.lastname)}
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="box-label">
@@ -72,14 +100,23 @@ function RegisterForm() {
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.email && isSubmitted ? " invalid" : "") +
+                (!errors.email && isSubmitted ? " valid" : "")
+              }
               id="email"
               name="email"
               type="email"
               ref={register({ required: true })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {errors.email?.type === "required" &&
+                loc.formatString(loc.required, loc.email)}
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="box-label">
@@ -87,14 +124,25 @@ function RegisterForm() {
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.password && isSubmitted ? " invalid" : "") +
+                (!errors.password && isSubmitted ? " valid" : "")
+              }
               id="password"
               name="password"
               type="password"
-              ref={register({ required: true })}
+              ref={register({ required: true, minLength: 6 })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {errors.password?.type === "required" &&
+                loc.formatString(loc.required, loc.password)}
+              {errors.password?.type === "minLength" &&
+                loc.formatString(loc.minLength, loc.password, "6")}
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="box-label">
@@ -102,14 +150,31 @@ function RegisterForm() {
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={
+                "f-input" +
+                (errors.repassword?.type === "passwordMatch" && isSubmitted
+                  ? " invalid"
+                  : "") +
+                (!errors.password && !errors.repassword && isSubmitted
+                  ? " valid"
+                  : "")
+              }
               id="repassword"
               name="repassword"
               type="password"
-              ref={register({ required: true })}
+              ref={register({
+                required: true,
+                validate: {
+                  passwordMatch: (value) => value === watchPassword,
+                },
+              })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {!errors.password && errors.repassword && loc.rePassword}
+            </div>
+          </div>
         </div>
       </div>
       <div class="btn-field">

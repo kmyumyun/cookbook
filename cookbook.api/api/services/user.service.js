@@ -7,6 +7,24 @@ const code = require("../../resources/error.code.json");
 const config = require("../../resources/config/settings.config");
 
 exports.createUser = async function (userDTO) {
+  let username = await UserModel.findOne({
+    username: userDTO.username,
+  });
+
+  let email = await UserModel.findOne({
+    email: userDTO.email,
+  });
+
+  if (username || email) {
+    let duplicateData = username ? "Username" : "Email";
+    throw {
+      message: message.user.create.fail.duplicate.format([duplicateData]),
+      status: 400,
+      code: code.duplicateUserData,
+      parameter: duplicateData.toLocaleLowerCase()
+    };
+  }
+
   let userInfo = new UserInfoModel();
 
   let user = new UserModel({
@@ -15,7 +33,7 @@ exports.createUser = async function (userDTO) {
     password: bcrypt.hashSync(userDTO.password, 8),
     firstName: userDTO.firstName,
     lastName: userDTO.firstName,
-    userInfo: userInfo
+    userInfo: userInfo,
   });
 
   let result = await user.save();
@@ -30,10 +48,10 @@ exports.authenticateUser = async function (userDTO) {
   if (!user) {
     throw {
       message: message.user.authenticate.notFound,
-      status: 404,
+      status: 401,
       code: code.userNotfound,
     };
-  };
+  }
 
   var validPassword = bcrypt.compareSync(userDTO.password, user.password);
 
@@ -43,7 +61,7 @@ exports.authenticateUser = async function (userDTO) {
       status: 401,
       code: code.userPasswordInvalid,
     };
-  };
+  }
 
   var token = jwt.sign({ id: user.id }, config.appSettings.jwtSecret, {
     expiresIn: 10, // set to 10 secs for testing

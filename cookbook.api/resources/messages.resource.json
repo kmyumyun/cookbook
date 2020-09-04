@@ -2,11 +2,15 @@
   "user": {
     "create": {
       "success": "User creation succeeded:",
-      "fail": "User creation failed:"
+      "fail": {
+        "general": "User creation failed!",
+        "duplicate": "{0} is already in use!"
+      }
     },
     "authenticate": {
       "notFound": "User not found!",
-      "incorrectPassword": "Password is incorrect!"
+      "incorrectPassword": "Password is incorrect!",
+      "general": "User authentication failed!"
     }
   },
   "validate": {
@@ -22,6 +26,12 @@
       "max": "{0} value is too high, Maximum is {1}",
       "maxLength": "{0} is too long. Maximum length is {1}",
       "minLength": "{0} is too short. Minimum length is {1}"
+    }
+  },
+  "recipe": {
+    "create": {
+      "success": "Recipe for \"{0}\" created",
+      "fail": "Recipe creation failed: {0}"
     }
   }
 }

@@ -14,12 +14,14 @@ let loc = new LocalizationStrings({
     loginpage: "Login",
     registerpage: "Register",
     home: "Home",
+    recipes: "Recipes",
     //validation
-    required: "{0} is required",
-    minLength: "{0} must be at least {1} characters long",
-    maxLength: "{0} must be at most {1} characters long",
-    min: "{0} must be bigger than {1}",
-    max: "{0} must be lower than {1}",
+    required: "{0} is required!",
+    rePassword: "Please make sure passwords match!",
+    minLength: "{0} must be at least {1} characters long!",
+    maxLength: "{0} must be at most {1} characters long!",
+    min: "{0} must be bigger than {1}!",
+    max: "{0} must be lower than {1}!",
   },
   bg: {
     //ui
@@ -34,12 +36,14 @@ let loc = new LocalizationStrings({
     loginpage: "Вход",
     registerpage: "Регистрация",
     home: "Начало",
+    recipes: "Рецепти",
     //validation
-    required: "Полето {0} е задължително",
-    minLength: "Полето {0} трябва да е с минимална дължина от {1} символа",
-    maxLength: "Полето {0} трябва да е с максимална дължина от {1} символа",
-    min: "Полето {0} трябва да е със стойност по-голяма от {1}",
-    max: "Полето {0} трябва да е със стойност по-малка от {1}",
+    required: "Полето {0} е задължително!",
+    rePassword: "Моля, уверете се, че паролите съвпадат!",
+    minLength: "Полето {0} трябва да е с минимална дължина от {1} символа!",
+    maxLength: "Полето {0} трябва да е с максимална дължина от {1} символа!",
+    min: "Полето {0} трябва да е със стойност по-голяма от {1}!",
+    max: "Полето {0} трябва да е със стойност по-малка от {1}!",
   },
 });
 

@@ -1,4 +1,6 @@
 {
-    "userNotfound": "USER_NOT_FOUND",
-    "userPasswordInvalid": "INVALID_PASSWORD"
+  "userNotfound": "USER_NOT_FOUND",
+  "userPasswordInvalid": "INVALID_PASSWORD",
+  "duplicateUserData": "DUPLICATE_USER_DATA",
+  "unknown": "UNKNOWN_ERROR"
 }

@@ -10,15 +10,6 @@ function LoginForm() {
     console.log(data);
   };
 
-  //ui.setLanguage('en');
-  function isInvalid(val) {
-    if (val === "test") {
-      return true;
-    }
-
-    return false;
-  }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div class="wrapper">
@@ -30,13 +21,17 @@ function LoginForm() {
           </div>
           <div class="box-input pt-10">
             <input
-              class="f-input"
+              className={"f-input" + (errors.username ? " invalid" : "")}
               name="username"
               type="text"
-              ref={register({ required: true, minLength: 3 })}
+              ref={register({ required: true })}
             />
           </div>
-          <div class="box-validation"></div>
+          <div class="box-validation">
+            <div class="ve">
+              {errors.username && loc.formatString(loc.required, loc.username)}
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="box-label">
@@ -46,29 +41,16 @@ function LoginForm() {
           </div>
           <div class="box-input">
             <input
-              class="f-input"
+              className={"f-input" + (errors.password ? " invalid" : "")}
               name="password"
               type="password"
-              ref={register({
-                required: {
-                  value: true,
-                  message: "Password is required!",
-                },
-                minLength: 3,
-                validate: {
-                  isInvalid: (value) => isInvalid(value),
-                },
-              })}
+              ref={register({ required: true })}
             />
           </div>
           <div class="box-validation">
-            <span>{errors.password && "Password required"}</span>
-            <span>
-              {" "}
-              {errors.password && errors.password.type === "isInvalid" && (
-                <p>Password is test!</p>
-              )}
-            </span>
+            <div class="ve">
+              {errors.password && loc.formatString(loc.required, loc.password)}
+            </div>
           </div>
         </div>
       </div>

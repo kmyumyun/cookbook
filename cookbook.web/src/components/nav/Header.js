@@ -12,10 +12,7 @@ class Header extends React.Component {
             <Link to={"/home"}>{loc.home}</Link>
           </div>
           <div className="nav-link">
-            <Link to={"/about"}>About</Link>
-          </div>
-          <div className="nav-link">
-            <Link to={"/about"}>About</Link>
+            <Link to={"/recipes"}>About</Link>
           </div>
         </div>
         <div className="nav-account">

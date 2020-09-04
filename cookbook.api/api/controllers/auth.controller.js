@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const userService = require("../services/user.service");
 const messageResources = require("../../resources/messages.resource.json");
+const codeNames = require("../../resources/error.code.json");
 
 exports.getAllUsers = function (req, res) {
   UserModel.find({}, function (err, result) {
@@ -24,8 +25,12 @@ exports.login = async function (req, res) {
     res.status(200).send(result);
   } catch (err) {
     let status = err.status ? err.status : 500;
-    console.log(err.error);
-    res.status(status).send({ message: err.message, code: err.code });
+    let code = err.code ? err.code : codeNames.unknown;
+    let message = err.message
+      ? err.message
+      : messageResources.user.authenticate.general;
+
+    res.status(status).send({ message, code });
   }
 };
 
@@ -34,16 +39,20 @@ exports.register = async function (req, res) {
 
   try {
     let result = await userService.createUser(userDTO);
-    res.send({ message: `${messageResources.user.create.success} ${result}` });
+    res.send({
+      message: `${messageResources.user.create.success} ${result.username}`,
+    });
   } catch (err) {
-    let errorCode = 500;
+    let status = err.status ? err.status : 500;
+    let code = err.code ? err.code : codeNames.unknown;
+    let message = err.message
+      ? err.message
+      : messageResources.user.create.fail.general;
 
-    if (err.name === "ValidationError") {
-      errorCode = 400;
-    }
-
-    res
-      .status(errorCode)
-      .send({ message: `${messageResources.user.create.fail} ${err}` });
+    res.status(status).send({
+      message,
+      code,
+      parameter: err.parameter,
+    });
   }
 };
